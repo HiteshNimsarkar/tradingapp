@@ -23,3 +23,7 @@ open http://localhost:8011
 ```
 
 
+To test the app :
+
+```
+npm test
