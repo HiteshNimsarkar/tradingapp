@@ -1,11 +1,17 @@
 import Event from '../../../events/Event';
 
 /**
- * @class TradeModel class represents model from MVC architecture.
+ * This class represents model from MVC architecture.
+ * Models has composition of event which serve purpose of Subject.
+ * Subject will have registry of observers to be notified.
+ * it has map for spark data.
+ * Spark data will get updated after each 30 seconds.
+ * @class TradeModel
  */
 export default class TradeModel {
 
     /** This constructor initializes items which is store for trades.
+     * it initializes map for spark data.
      */
     constructor() {
 
@@ -14,6 +20,9 @@ export default class TradeModel {
          * this.itemAdded is composition for Events which will notify once items changes.
          */
         this.itemAdded = new Event(this);
+        /**
+         * id for sparksMap is name property of trade.
+         */
         this.sparksMap = new Map();
 
 
@@ -21,8 +30,7 @@ export default class TradeModel {
     /** a addItem method. 
       * This method add trade to items if it is new.
       * This method update items if trade is not new.
-      * It sorts items by lastChangeBid desc.
-      * It notifies view[TradeView]. 
+      * It notifies view[TradeView] once we prepare trade store. 
       * @param {Object} inputItem input trade to be added in TradeModelStore[items]
       */
     addItem(inputItem) {
@@ -79,13 +87,25 @@ export default class TradeModel {
      * @param {Object} bestBid
      */
     addSpark(name, bestAsk, bestBid) {
+        /**
+         * Logic for preparing spark is 
+         * (bestBid + bestAsk) / 2
+         */
         let _spark = (bestBid + bestAsk) / 2;
         let sparkObj = this.sparksMap.get(name);
+        /**
+         * adding spark data with timer false for first time
+         * and calculate spark data _spark
+         */
         if (!sparkObj) {
             this.sparksMap.set(name, { sparkArr: [_spark], timer: false });
         } 
-        if (this.sparksMap.get(name).timer === false) {
+        else if (this.sparksMap.get(name).timer === false) {
             this.sparksMap.get(name).timer = true;
+            /**
+             * spark data is setup for updation after 30 sec using set interval.
+             * After 30 seconds it delete old interval and create new one , and update new spark data.
+             */
             let interval = setInterval(() => {
                 this.sparksMap.get(name).timer = false;
                 sparkObj=this.sparksMap.get(name);

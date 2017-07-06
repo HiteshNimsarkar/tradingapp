@@ -28,6 +28,7 @@ table {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     border: 1px solid grey;
+    min-width:  94.5%;
 }
 
 tr:nth-child(even) {
@@ -55,14 +56,51 @@ td:nth-child(1),td:nth-child(6) {
 
 
 #stomp-status{
-    position: absolute;
+    position: relative;
     background: green;
-    width: 100%;
+    width: 94.5%;
     text-align: center;
     margin: auto;
-    margin-left: -10px;
     color: white;
     border: 1px solid grey;
     bottom: 0
 }
+
+#stomp-status ul{
+    list-style-type: none;
+}
+
+header {
+    margin-top: -10px;
+    background:#673AB7;
+    padding: 0px;
+    position: fixed;
+    width: 99%;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    height: 50px;
+    
+}
+
+#top-menu-bar {
+    border: 1px dashed #673AB7;
+   
+    text-align: right;
+}
+
+
+#logo-bar {
+    border: 1px dashed #673AB7;
+    
+}
+
+#content {
+    
+    padding-top: 120px;
+   
+}
+
+
 
