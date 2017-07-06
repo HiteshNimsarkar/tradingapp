@@ -8,7 +8,7 @@ Grid is sorted by lastChangeBid and sprkline updates after 30 seconds.
 
 Requirements:
 
-- Node 
+- Node 6.x.x
 - npm 
 
 To run the app locally:
